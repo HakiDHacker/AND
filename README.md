@@ -1,546 +1,791 @@
-/* 1. Android App to Calculate Area of a Circle */
-// MainActivity.java
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-
-public class MainActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        EditText radiusInput = findViewById(R.id.radiusInput);
-        Button calculateButton = findViewById(R.id.calculateButton);
-        TextView resultView = findViewById(R.id.resultView);
-
-        calculateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String radiusStr = radiusInput.getText().toString();
-                if (!radiusStr.isEmpty()) {
-                    double radius = Double.parseDouble(radiusStr);
-                    double area = Math.PI * radius * radius;
-                    resultView.setText("Area: " + area);
-                } else {
-                    resultView.setText("Please enter a radius");
-                }
-            }
-        });
-    }
-}
-
-ACTIVITYMAIN_XML
+P1(Area of a circle)
+Activity_main.xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingBottom="10dp" />
 
     <EditText
-        android:id="@+id/radiusInput"
+        android:id="@+id/inputRadius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Radius"
-        android:inputType="numberDecimal"/>
+        android:hint="@string/enter_radius"
+        android:inputType="numberDecimal"
+        android:padding="10dp"
+        android:textSize="16sp"/>
 
     <Button
         android:id="@+id/calculateButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Calculate Area"/>
+        android:text="@string/calculate_area"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/resultText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Area will be displayed here"
-        android:textSize="18sp"/>
-
-</LinearLayout>
-
-2. Area of a Rectangle App
-Code (MainActivity.java)
-package com.example.areaofrectangle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-public class MainActivity extends AppCompatActivity {
-    EditText lengthInput, widthInput;
-    Button calculateButton;
-    TextView resultText;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        lengthInput = findViewById(R.id.lengthInput);
-        widthInput = findViewById(R.id.widthInput);
-        calculateButton = findViewById(R.id.calculateButton);
-        resultText = findViewById(R.id.resultText);
-
-        calculateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String lengthStr = lengthInput.getText().toString();
-                String widthStr = widthInput.getText().toString();
-
-                if (!lengthStr.isEmpty() && !widthStr.isEmpty()) {
-                    double length = Double.parseDouble(lengthStr);
-                    double width = Double.parseDouble(widthStr);
-                    double area = length * width;
-                    resultText.setText("Area: " + area);
-                } else {
-                    resultText.setText("Enter valid values");
-                }
-            }
-        });
-    }
-}
-Layout (activity_main.xml)
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
-
-    <EditText
-        android:id="@+id/lengthInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Length"
-        android:inputType="numberDecimal"/>
-
-    <EditText
-        android:id="@+id/widthInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Width"
-        android:inputType="numberDecimal"/>
-
-    <Button
-        android:id="@+id/calculateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calculate Area"/>
-
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Area will be displayed here"
-        android:textSize="18sp"/>
-
+        android:text="@string/default_result"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"/>
 </LinearLayout>
 
-3. Area of a Square App
-Code (MainActivity.java)
-package com.example.areaofsquare;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-public class MainActivity extends AppCompatActivity {
-    EditText sideInput;
-    Button calculateButton;
-    TextView resultText;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        sideInput = findViewById(R.id.sideInput);
-        calculateButton = findViewById(R.id.calculateButton);
-        resultText = findViewById(R.id.resultText);
-
-        calculateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String sideStr = sideInput.getText().toString();
-                if (!sideStr.isEmpty()) {
-                    double side = Double.parseDouble(sideStr);
-                    double area = side * side;
-                    resultText.setText("Area: " + area);
-                } else {
-                    resultText.setText("Enter a valid side length");
-                }
-            }
-        });
-    }
-}
-Layout (activity_main.xml)
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp">
-
-    <EditText
-        android:id="@+id/sideInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Side Length"
-        android:inputType="numberDecimal"/>
-
-    <Button
-        android:id="@+id/calculateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Calculate Area"/>
-
-    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Area will be displayed here"
-        android:textSize="18sp"/>
-
-</LinearLayout>
-
-4. Login Screen with Validation
-Code (MainActivity.java)
-package com.example.loginscreen;
-
-import androidx.appcompat.app.AppCompatActivity;
+mainActivity.java
+package com.example.myapplication;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    EditText usernameInput, passwordInput;
-    Button loginButton;
-    TextView errorText;
+
+    EditText inputRadius;
+    Button calculateButton;
+    TextView resultText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usernameInput = findViewById(R.id.usernameInput);
-        passwordInput = findViewById(R.id.passwordInput);
-        loginButton = findViewById(R.id.loginButton);
-        errorText = findViewById(R.id.errorText);
+        // Initialize UI components
+        inputRadius = findViewById(R.id.inputRadius);
+        calculateButton = findViewById(R.id.calculateButton);
+        resultText = findViewById(R.id.resultText);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        // Set button click listener
+        calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameInput.getText().toString();
-                String password = passwordInput.getText().toString();
-
-                if (username.isEmpty() || password.isEmpty()) {
-                    errorText.setText("Fields cannot be empty!");
-                } else {
-                    errorText.setText("");
-                    Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                }
+                calculateArea();
             }
         });
     }
-}
 
-Layout (activity_main.xml)
+    private void calculateArea() {
+        String radiusStr = inputRadius.getText().toString().trim();
+
+        if (!radiusStr.isEmpty()) {
+            double radius = Double.parseDouble(radiusStr);
+            double area = Math.PI * radius * radius;
+
+            // Use getString() for string resources
+            resultText.setText(getString(R.string.area_text, area));
+        } else {
+            Toast.makeText(this, getString(R.string.error_empty_radius), Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+Strings.xml
+<resources>
+    <string name="app_name">Circle Area Calculator</string>
+    <string name="title">Calculate Area of a Circle</string>
+    <string name="enter_radius">Enter radius</string>
+    <string name="calculate_area">Calculate Area</string>
+    <string name="default_result">Area will be displayed here</string>
+    <string name="error_empty_radius">Please enter a radius!</string>
+    <string name="area_text">Area: %1$.2f sq. units</string>
+</resources>
+
+P2(Area of a Rectangle)
+Activity_main.xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingBottom="10dp" />
+
+    <EditText
+        android:id="@+id/inputLength"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_length"
+        android:inputType="numberDecimal"
+        android:padding="10dp"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/inputWidth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_width"
+        android:inputType="numberDecimal"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/calculate_area"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_result"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>
+
+Mainactivity.java
+package com.example.myapplication;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText inputLength, inputWidth;
+    Button calculateButton;
+    TextView resultText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize UI components
+        inputLength = findViewById(R.id.inputLength);
+        inputWidth = findViewById(R.id.inputWidth);
+        calculateButton = findViewById(R.id.calculateButton);
+        resultText = findViewById(R.id.resultText);
+
+        // Set button click listener
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculateArea();
+            }
+        });
+    }
+
+    private void calculateArea() {
+        String lengthStr = inputLength.getText().toString().trim();
+        String widthStr = inputWidth.getText().toString().trim();
+
+        if (!lengthStr.isEmpty() && !widthStr.isEmpty()) {
+            double length = Double.parseDouble(lengthStr);
+            double width = Double.parseDouble(widthStr);
+            double area = length * width;
+
+            // Use getString() for string resources
+            resultText.setText(getString(R.string.area_text, area));
+        } else {
+            Toast.makeText(this, getString(R.string.error_empty), Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
+strings.xml
+<resources>
+    <string name="app_name">Rectangle Area Calculator</string>
+    <string name="title">Calculate Area of a Rectangle</string>
+    <string name="enter_length">Enter length</string>
+    <string name="enter_width">Enter width</string>
+    <string name="calculate_area">Calculate Area</string>
+    <string name="default_result">Area will be displayed here</string>
+    <string name="error_empty">Please enter both length and width!</string>
+    <string name="area_text">Area: %1$.2f sq. units</string>
+</resources>
+
+
+(P3) Area of a Sqaure
+Activitymain.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingBottom="10dp" />
+
+    <EditText
+        android:id="@+id/inputSide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_side"
+        android:inputType="numberDecimal"
+        android:padding="10dp"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/calculate_area"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_result"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>
+
+Mainactivity.java
+package com.example.myapplication;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText inputSide;
+    Button calculateButton;
+    TextView resultText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize UI components
+        inputSide = findViewById(R.id.inputSide);
+        calculateButton = findViewById(R.id.calculateButton);
+        resultText = findViewById(R.id.resultText);
+
+        // Set button click listener
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculateArea();
+            }
+        });
+    }
+
+    private void calculateArea() {
+        String sideStr = inputSide.getText().toString().trim();
+
+        if (!sideStr.isEmpty()) {
+            double side = Double.parseDouble(sideStr);
+            double area = side * side;
+
+            // Use getString() for string resources
+            resultText.setText(getString(R.string.area_text, area));
+        } else {
+            Toast.makeText(this, getString(R.string.error_empty), Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
+strings.xml
+<resources>
+    <string name="app_name">Square Area Calculator</string>
+    <string name="title">Calculate Area of a Square</string>
+    <string name="enter_side">Enter side length</string>
+    <string name="calculate_area">Calculate Area</string>
+    <string name="default_result">Area will be displayed here</string>
+    <string name="error_empty">Please enter the side length!</string>
+    <string name="area_text">Area: %1$.2f sq. units</string>
+</resources>
+
+(P4)  login screen with EditText fields for username and password, and a Button to submit. Include validation for empty fields.
+Activitymain.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     android:padding="20dp">
 
-    <EditText
-        android:id="@+id/usernameInput"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter Username"
-        android:inputType="text"/>
+        android:text="@string/login_title"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:paddingBottom="20dp"/>
 
     <EditText
-        android:id="@+id/passwordInput"
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Password"
-        android:inputType="textPassword"/>
+        android:hint="@string/enter_username"
+        android:inputType="textPersonName"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"/>
-
-    <TextView
-        android:id="@+id/errorText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#FF0000"/>
+        android:text="@string/login_button"
+        android:layout_marginTop="10dp"/>
 
 </LinearLayout>
 
-5. Registration Form App
-Code (MainActivity.java)
-package com.example.registrationform;
-
+Mainactivity.java
+package com.example.myapplication;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText username, password;
+    Button loginButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize UI components
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        loginButton = findViewById(R.id.loginButton);
+
+        // Set button click listener
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validateLogin();
+            }
+        });
+    }
+
+    private void validateLogin() {
+        String user = username.getText().toString().trim();
+        String pass = password.getText().toString().trim();
+
+        if (user.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(this, getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
+strings.xml
+<resources>
+    <string name="app_name">Login Screen</string>
+    <string name="login_title">User Login</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login_button">Login</string>
+    <string name="empty_fields">Please fill in both fields!</string>
+    <string name="login_success">Login Successful!</string>
+</resources>
+
+(P5) Create a Registration Form with the following fields: • Username(Text Input) • EmailAddress (Text Input) • Gender(Radio Buttons with options "Male" and "Female") • Password (Password Input) Submit Button
+Activitymain.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_title"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:paddingBottom="20dp"/>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_username"
+        android:inputType="textPersonName"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_gender"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"/>
+
+    <RadioGroup
+        android:id="@+id/genderGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/male"/>
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/female"
+            android:layout_marginStart="20dp"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register_button"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>
+
+Mainactivity.java
+package com.example.myapplication;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
-    EditText usernameInput, emailInput, passwordInput;
+
+    EditText username, email, password;
     RadioGroup genderGroup;
-    Button submitButton;
-    TextView errorText;
+    Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usernameInput = findViewById(R.id.usernameInput);
-        emailInput = findViewById(R.id.emailInput);
-        passwordInput = findViewById(R.id.passwordInput);
+        // Initialize UI components
+        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
         genderGroup = findViewById(R.id.genderGroup);
-        submitButton = findViewById(R.id.submitButton);
-        errorText = findViewById(R.id.errorText);
+        registerButton = findViewById(R.id.registerButton);
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        // Set button click listener
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameInput.getText().toString();
-                String email = emailInput.getText().toString();
-                String password = passwordInput.getText().toString();
-                int selectedGenderId = genderGroup.getCheckedRadioButtonId();
-
-                if (username.isEmpty() || email.isEmpty() || password.isEmpty() || selectedGenderId == -1) {
-                    errorText.setText("All fields must be filled!");
-                } else {
-                    errorText.setText("");
-                    Toast.makeText(MainActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                }
+                validateRegistration();
             }
         });
     }
+
+    private void validateRegistration() {
+        String user = username.getText().toString().trim();
+        String userEmail = email.getText().toString().trim();
+        String userPass = password.getText().toString().trim();
+        int selectedGenderId = genderGroup.getCheckedRadioButtonId();
+
+        // Email validation pattern
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+
+        if (user.isEmpty() || userEmail.isEmpty() || userPass.isEmpty() || selectedGenderId == -1) {
+            Toast.makeText(this, getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
+        } else if (!emailPattern.matcher(userEmail).matches()) {
+            Toast.makeText(this, getString(R.string.invalid_email), Toast.LENGTH_SHORT).show();
+        } else {
+            // Get selected gender
+            RadioButton selectedGender = findViewById(selectedGenderId);
+            String gender = selectedGender.getText().toString();
+
+            // Show success message
+            String successMessage = getString(R.string.register_success) + "\nUsername: " + user +
+                    "\nEmail: " + userEmail + "\nGender: " + gender;
+            Toast.makeText(this, successMessage, Toast.LENGTH_LONG).show();
+        }
+    }
 }
 
-Layout (activity_main.xml)
+Strings.xml
+<resources>
+    <string name="app_name">Registration Form</string>
+    <string name="register_title">User Registration</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="select_gender">Select Gender:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="register_button">Register</string>
+    <string name="empty_fields">All fields are required!</string>
+    <string name="invalid_email">Enter a valid email!</string>
+    <string name="register_success">Registration Successful!</string>
+</resources>
+
+(P6) Create a Registration Form with the following fields:
+Username (Text Input), Email Address (Text Input),Phone Number (Text Input),Password (Password Input),Submit Button (Floating Action Button)
+Activitymain.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/register_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_title"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"/>
+
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_username"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:layout_below="@id/register_title"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_email"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:layout_below="@id/username"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_phone"
+        android:inputType="phone"
+        android:padding="10dp"
+        android:layout_below="@id/email"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:layout_below="@id/phone"
+        android:layout_marginTop="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_save"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/password"/>
+
+</RelativeLayout>
+
+Mainactivity.java
+package com.example.myapplication;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.regex.Pattern;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText username, email, phone, password;
+    FloatingActionButton registerButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize UI components
+        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
+        phone = findViewById(R.id.phone);
+        password = findViewById(R.id.password);
+        registerButton = findViewById(R.id.registerButton);
+
+        // Set button click listener
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validateRegistration();
+            }
+        });
+    }
+
+    private void validateRegistration() {
+        String user = username.getText().toString().trim();
+        String userEmail = email.getText().toString().trim();
+        String userPhone = phone.getText().toString().trim();
+        String userPass = password.getText().toString().trim();
+
+        // Email validation pattern
+        Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+
+        // Phone validation (10-digit only)
+        Pattern phonePattern = Pattern.compile("^\\d{10}$");
+
+        if (user.isEmpty() || userEmail.isEmpty() || userPhone.isEmpty() || userPass.isEmpty()) {
+            Toast.makeText(this, getString(R.string.empty_fields), Toast.LENGTH_SHORT).show();
+        } else if (!emailPattern.matcher(userEmail).matches()) {
+            Toast.makeText(this, getString(R.string.invalid_email), Toast.LENGTH_SHORT).show();
+        } else if (!phonePattern.matcher(userPhone).matches()) {
+            Toast.makeText(this, getString(R.string.invalid_phone), Toast.LENGTH_SHORT).show();
+        } else {
+            // Show success message
+            String successMessage = getString(R.string.register_success) + "\nUsername: " + user +
+                    "\nEmail: " + userEmail + "\nPhone: " + userPhone;
+            Toast.makeText(this, successMessage, Toast.LENGTH_LONG).show();
+        }
+    }
+}
+strings.xml
+<resources>
+    <string name="app_name">Registration Form FAB</string>
+    <string name="register_title">User Registration</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_phone">Enter Phone Number</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="empty_fields">All fields are required!</string>
+    <string name="invalid_email">Enter a valid email!</string>
+    <string name="invalid_phone">Enter a valid 10-digit phone number!</string>
+    <string name="register_success">Registration Successful!</string>
+</resources>
+
+(p7) Create a simple "Hello World" application in Android Studio. Explain the purpose of the activity_main.xml and main activity file.
+Activitymain.xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="20dp">
 
-    <EditText
-        android:id="@+id/usernameInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Username"
-        android:inputType="text"/>
-
-    <EditText
-        android:id="@+id/emailInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Email"
-        android:inputType="textEmailAddress"/>
-
-    <RadioGroup
-        android:id="@+id/genderGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/maleRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male"/>
-
-        <RadioButton
-            android:id="@+id/femaleRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female"/>
-    </RadioGroup>
-
-    <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Password"
-        android:inputType="textPassword"/>
-
-    <Button
-        android:id="@+id/submitButton"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"/>
-
-    <TextView
-        android:id="@+id/errorText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#FF0000"/>
+        android:text="@string/hello_world"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>
 
-6. Create a Registration Form with the following fields: 1. Username (Text Input) 2. Email Address (Text Input) 3. Phone Number (Text Input) 4. Password (Password Input) 5. Submit Button (Floating Action Button)
-XML Layout (activity_main.xml)
+Mainactivity.java
+package com.example.myapplication;
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main); // Link UI with Java Code
+    }
+}
+Strings.xml
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:padding="20dp">
+<resources>
+    <string name="app_name">HelloWorldApp</string>
+    <string name="hello_world">Hello, World!</string>
+</resources>
 
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Username"
-        android:inputType="textPersonName"
-        android:padding="10dp" />
-
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etUsername"
-        android:layout_marginTop="10dp"
-        android:hint="Email Address"
-        android:inputType="textEmailAddress"
-        android:padding="10dp" />
-
-    <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etEmail"
-        android:layout_marginTop="10dp"
-        android:hint="Phone Number"
-        android:inputType="phone"
-        android:padding="10dp" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etPhone"
-        android:layout_marginTop="10dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/etPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:contentDescription="Submit" />
-
-</RelativeLayout>
-
-Java Code (MainActivity.java)
-package com.example.registrationform;
-
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-public class MainActivity extends AppCompatActivity {
-
-    private EditText etUsername, etEmail, etPhone, etPassword;
-    private FloatingActionButton btnSubmit;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // Initialize UI elements
-        etUsername = findViewById(R.id.etUsername);
-        etEmail = findViewById(R.id.etEmail);
-        etPhone = findViewById(R.id.etPhone);
-        etPassword = findViewById(R.id.etPassword);
-        btnSubmit = findViewById(R.id.btnSubmit);
-
-        // Button Click Listener
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                validateForm();
-            }
-        });
-    }
-
-    private void validateForm() {
-        String username = etUsername.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
-        String phone = etPhone.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-
-        if (username.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Invalid Email Address", Toast.LENGTH_SHORT).show();
-        } else if (phone.length() != 10) {
-            Toast.makeText(this, "Phone Number must be 10 digits", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-        }
-    }
-}
-
-7."Hello World" Application & Explanation
-Code (MainActivity.java)
-package com.example.helloworld;
-
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-
-public class MainActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-}
-
-Layout (activity_main.xml)
+In an Android app, two key files work together:
+1.	activity_main.xml → Defines the UI (User Interface) layout.
+2.	MainActivity.java → Handles app logic and user interactions.
+________________________________________
+✅ 1. Purpose of activity_main.xml (UI Layout)
+📍 Location: res/layout/activity_main.xml
+📌 What it does:
+•	It defines the visual elements of the app (buttons, text fields, etc.).
+•	It follows XML (Extensible Markup Language) to structure the layout.
+•	The UI is linked to Java/Kotlin code using setContentView() in MainActivity.java.
+📌 Example of activity_main.xml:
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -549,53 +794,121 @@ Layout (activity_main.xml)
     android:gravity="center">
 
     <TextView
-        android:id="@+id/helloText"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Hello, World!"
         android:textSize="24sp"
         android:textStyle="bold"/>
 </LinearLayout>
 
-Explanation of Activity Files
-📌 MainActivity.java
-•	The onCreate method runs when the app starts.
-•	setContentView(R.layout.activity_main); links the UI file (activity_main.xml) to this Java class.
-📌 activity_main.xml
-•	This is the UI layout file.
-•	It contains a TextView that displays "Hello World!" on the screen.
-8. Android Resources: Colors & Strings
-Step 1: Define Colors in colors.xml
-📍 Open res → values → colors.xml and add:
+✅ Key Points:
+•	Defines a TextView that displays "Hello, World!".
+•	Uses LinearLayout to arrange elements vertically.
+•	android:text="Hello, World!" → Displays text on the screen.
+
+2. Purpose of MainActivity.java (App Logic)
+📍 Location: app/src/main/java/com/example/yourapp/MainActivity.java
+📌 What it does:
+•	It is the entry point of the app (executed when the app starts).
+•	It controls app behavior and handles user interactions.
+•	The onCreate() method is executed when the app starts.
+•	It links the UI (activity_main.xml) with the backend logic using setContentView().
+📌 Example of MainActivity.java:
+package com.example.helloworldapp;
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main); // Load the UI from XML
+    }
+}
+Key Points:
+•	extends AppCompatActivity → Allows using Android features.
+•	onCreate() → Runs when the app launches.
+•	setContentView(R.layout.activity_main); → Links activity_main.xml to this Java file.
+
+(P8) Insert the new contents in the following resources and demonstrate their uses in the android application Android Resources: (Color, String)
+Activitymain.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    android:background="@color/primaryColor">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textview_message"
+        android:textSize="20sp"
+        android:textColor="@color/textColor"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_text"
+        android:backgroundTint="@color/buttonColor"
+        android:textColor="@color/textColor"
+        android:padding="10dp"/>
+</LinearLayout>
+
+Strings.xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ResourceDemo</string>
+    <string name="welcome_message">Welcome to Resource Demo App!</string>
+    <string name="button_text">Click Me</string>
+    <string name="textview_message">Hello, this text uses string resources!</string>
+</resources>
+
+Colors.xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primaryColor">#6200EE</color>
     <color name="secondaryColor">#03DAC5</color>
-    <color name="whiteColor">#FFFFFF</color>
-</resources>
-Step 2: Use Colors in activity_main.xml
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Welcome to Android!"
-    android:textColor="@color/primaryColor"
-    android:textSize="24sp"/>
-Step 3: Use Colors in Java Code
-textView.setTextColor(getResources().getColor(R.color.primaryColor));
-📌 Using Strings in Android
-Step 1: Define Strings in strings.xml
-📍 Open res → values → strings.xml and add:
-<resources>
-    <string name="app_name">My Android App</string>
-    <string name="welcome_message">Welcome to Android Development!</string>
+    <color name="textColor">#FFFFFF</color>
+    <color name="buttonColor">#FF9800</color>
 </resources>
 
-Step 2: Use Strings in activity_main.xml
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/welcome_message"
-    android:textSize="20sp"/>
+Mainactivity.java
+package com.example.myapplication;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 
-Step 3: Use Strings in Java Code
-textView.setText(getString(R.string.welcome_message));
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main); // Load UI Layout
+
+        // Linking UI elements with Java Code
+        TextView textView = findViewById(R.id.textView);
+        Button button = findViewById(R.id.button);
+
+        // Setting string resource programmatically
+        textView.setText(getResources().getString(R.string.textview_message));
+
+        // Button Click Event
+        button.setOnClickListener(v ->
+                Toast.makeText(MainActivity.this, getString(R.string.welcome_message), Toast.LENGTH_SHORT).show()
+        );
+    }
+}
+
+
+
+
+
